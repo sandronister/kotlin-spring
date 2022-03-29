@@ -17,11 +17,11 @@ class CustomerController(
 
     @GetMapping
     fun list(@RequestParam name:String?):List<CustomerModel>{
-       return service.list((name))
+       return service.list(name)
     }
 
     @GetMapping("/{id}")
-    fun getCustomer(@PathVariable id:String): CustomerModel {
+    fun getCustomer(@PathVariable id:Int): CustomerModel {
         return service.getCustomer(id)
     }
 
@@ -33,13 +33,13 @@ class CustomerController(
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun updateCustomer(@PathVariable id:String,@RequestBody customer:PutCustomerRequest) {
+    fun updateCustomer(@PathVariable id:Int,@RequestBody customer:PutCustomerRequest) {
        service.updateCustomer(customer.toCustomerModel(id))
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteCustomer(@PathVariable id:String) {
+    fun deleteCustomer(@PathVariable id:Int) {
         service.deleteCustomer(id)
     }
 }
