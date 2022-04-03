@@ -1,18 +1,25 @@
 package com.mercadolivro.extensions
 
 import com.mercadolivro.enum.BookStatus
+import com.mercadolivro.enum.CustomerStatus
 import com.mercadolivro.model.BookModel
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.request.PostBookRequest
 import com.mercadolivro.request.PostCustomerRequest
+import com.mercadolivro.request.PutBookRequest
 import com.mercadolivro.request.PutCustomerRequest
 
 fun PostCustomerRequest.toCustomerModel(): CustomerModel{
-    return CustomerModel(name=this.name,email=this.email)
+    return CustomerModel(name=this.name,email=this.email, status=CustomerStatus.ATIVO)
 }
 
-fun PutCustomerRequest.toCustomerModel(id:Int):CustomerModel{
-    return CustomerModel(id=id,name=this.name,email=this.email)
+fun PutCustomerRequest.toCustomerModel(previousValue:CustomerModel):CustomerModel{
+    return CustomerModel(
+        id=previousValue.id,
+        name=this.name ?: previousValue.name,
+        email=this.email ?: previousValue.email,
+        status = previousValue.status
+    )
 }
 
 fun PostBookRequest.toBookModel(customer:CustomerModel):BookModel{
@@ -21,5 +28,15 @@ fun PostBookRequest.toBookModel(customer:CustomerModel):BookModel{
         price = this.price,
         status = BookStatus.ATIVO,
         customer = customer
+    )
+}
+
+fun PutBookRequest.toBookModel(previosValue:BookModel):BookModel{
+    return BookModel(
+        id = previosValue.id,
+        name = this.name ?: previosValue.name,
+        price = this.price ?: previosValue.price,
+        status = previosValue.status,
+        customer = previosValue.customer
     )
 }
