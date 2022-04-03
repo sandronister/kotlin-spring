@@ -8,6 +8,8 @@ import com.mercadolivro.request.PostBookRequest
 import com.mercadolivro.request.PostCustomerRequest
 import com.mercadolivro.request.PutBookRequest
 import com.mercadolivro.request.PutCustomerRequest
+import com.mercadolivro.response.BookResponse
+import com.mercadolivro.response.CustomerResponse
 
 fun PostCustomerRequest.toCustomerModel(): CustomerModel{
     return CustomerModel(name=this.name,email=this.email, status=CustomerStatus.ATIVO)
@@ -32,12 +34,30 @@ fun PostBookRequest.toBookModel(customer:CustomerModel):BookModel{
 }
 
 fun PutBookRequest.toBookModel(previosValue:BookModel):BookModel{
-    print(previosValue.status)
     return BookModel(
         id = previosValue.id,
         name = this.name ?: previosValue.name,
         price = this.price ?: previosValue.price,
         status = previosValue.status,
         customer = previosValue.customer
+    )
+}
+
+fun CustomerModel.toResponse(): CustomerResponse {
+    return CustomerResponse(
+        id=this.id,
+        name=this.name,
+        email=this.email,
+        status=this.status
+    )
+}
+
+fun BookModel.toResponse(): BookResponse {
+    return BookResponse(
+        id=this.id,
+        name=this.name,
+        price=this.price,
+        customer=this.customer,
+        status=this.status
     )
 }

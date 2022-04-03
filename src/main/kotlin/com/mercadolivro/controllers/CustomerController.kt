@@ -1,10 +1,10 @@
 package com.mercadolivro.controllers
 
 import com.mercadolivro.extensions.toCustomerModel
-import com.mercadolivro.model.CustomerModel
+import com.mercadolivro.extensions.toResponse
 import com.mercadolivro.request.PostCustomerRequest
 import com.mercadolivro.request.PutCustomerRequest
-import com.mercadolivro.service.BookService
+import com.mercadolivro.response.CustomerResponse
 import com.mercadolivro.service.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -17,13 +17,13 @@ class CustomerController(
 ) {
 
     @GetMapping
-    fun list(@RequestParam name:String?):List<CustomerModel>{
-       return customerService.list(name)
+    fun list(@RequestParam name:String?):List<CustomerResponse>{
+       return customerService.list(name).map { it.toResponse() }
     }
 
     @GetMapping("/{id}")
-    fun getCustomer(@PathVariable id:Int): CustomerModel {
-        return customerService.findById(id)
+    fun getCustomer(@PathVariable id:Int): CustomerResponse {
+        return customerService.findById(id).toResponse()
     }
 
     @PostMapping
