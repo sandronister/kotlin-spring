@@ -32,6 +32,7 @@ fun PostBookRequest.toBookModel(customer:CustomerModel):BookModel{
 }
 
 fun PutBookRequest.toBookModel(previosValue:BookModel):BookModel{
+    print(previosValue.status)
     return BookModel(
         id = previosValue.id,
         name = this.name ?: previosValue.name,
