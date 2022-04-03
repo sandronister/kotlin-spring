@@ -22,13 +22,13 @@ class CustomerController(
 
     @GetMapping("/{id}")
     fun getCustomer(@PathVariable id:Int): CustomerModel {
-        return service.getCustomer(id)
+        return service.getById(id)
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun postCustomer(@RequestBody customer:PostCustomerRequest){
-        service.postCustomer(customer.toCustomerModel())
+        service.create(customer.toCustomerModel())
     }
 
     @PutMapping("/{id}")

@@ -14,11 +14,11 @@ class CustomerService(val repository:CustomerRepository) {
         return repository.findAll().toList()
     }
 
-    fun getCustomer(id:Int): CustomerModel {
+    fun getById(id:Int): CustomerModel {
         return  repository.findById(id).orElseThrow()
     }
 
-    fun postCustomer( customer: CustomerModel){
+    fun create(customer: CustomerModel){
         repository.save(customer)
     }
 
