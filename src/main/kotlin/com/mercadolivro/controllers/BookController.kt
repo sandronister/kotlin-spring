@@ -2,9 +2,9 @@ package com.mercadolivro.controllers
 
 import com.mercadolivro.extensions.toBookModel
 import com.mercadolivro.extensions.toResponse
-import com.mercadolivro.request.PostBookRequest
-import com.mercadolivro.request.PutBookRequest
-import com.mercadolivro.response.BookResponse
+import com.mercadolivro.controllers.request.PostBookRequest
+import com.mercadolivro.controllers.request.PutBookRequest
+import com.mercadolivro.controllers.response.BookResponse
 import com.mercadolivro.service.BookService
 import com.mercadolivro.service.CustomerService
 import org.springframework.data.domain.Page
@@ -46,7 +46,7 @@ class BookController(
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable id:Int):BookResponse{
+    fun findById(@PathVariable id:Int): BookResponse {
         return bookService.findById(id).toResponse()
     }
 

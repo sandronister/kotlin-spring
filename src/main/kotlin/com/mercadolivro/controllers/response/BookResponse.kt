@@ -1,4 +1,4 @@
-package com.mercadolivro.response
+package com.mercadolivro.controllers.response
 
 import com.mercadolivro.enum.BookStatus
 import com.mercadolivro.model.CustomerModel
