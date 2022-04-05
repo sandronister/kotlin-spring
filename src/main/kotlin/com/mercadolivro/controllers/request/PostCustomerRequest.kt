@@ -1,3 +1,12 @@
 package com.mercadolivro.controllers.request
 
-data class PostCustomerRequest(val name:String, val email:String)
+import javax.validation.constraints.Email
+import javax.validation.constraints.NotEmpty
+
+data class PostCustomerRequest(
+    @field:NotEmpty(message="É necessário informar o nome")
+    val name:String,
+
+    @field:Email(message="Informe um e-mail válido")
+    val email:String
+    )

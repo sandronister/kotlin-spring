@@ -8,6 +8,7 @@ import com.mercadolivro.controllers.response.CustomerResponse
 import com.mercadolivro.service.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 
 @RestController()
@@ -28,7 +29,7 @@ class CustomerController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun postCustomer(@RequestBody customer: PostCustomerRequest){
+    fun postCustomer(@RequestBody @Valid customer: PostCustomerRequest){
         customerService.postCustomer(customer.toCustomerModel())
     }
 
