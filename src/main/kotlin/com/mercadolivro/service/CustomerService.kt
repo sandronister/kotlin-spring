@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class CustomerService(
-    val repository:CustomerRepository,
-    val bookService:BookService ) {
+    private val repository:CustomerRepository,
+    private val bookService:BookService ) {
 
     fun list(name:String?):List<CustomerModel>{
         name?.let {
