@@ -12,7 +12,12 @@ import com.mercadolivro.controllers.response.BookResponse
 import com.mercadolivro.controllers.response.CustomerResponse
 
 fun PostCustomerRequest.toCustomerModel(): CustomerModel{
-    return CustomerModel(name=this.name,email=this.email, status=CustomerStatus.ATIVO)
+    return CustomerModel(
+        name=this.name,
+        email=this.email,
+        status=CustomerStatus.ATIVO,
+        password = this.password
+    )
 }
 
 fun PutCustomerRequest.toCustomerModel(previousValue:CustomerModel):CustomerModel{
@@ -20,7 +25,8 @@ fun PutCustomerRequest.toCustomerModel(previousValue:CustomerModel):CustomerMode
         id=previousValue.id,
         name=this.name ?: previousValue.name,
         email=this.email ?: previousValue.email,
-        status = previousValue.status
+        status = previousValue.status,
+        password = previousValue.password
     )
 }
 

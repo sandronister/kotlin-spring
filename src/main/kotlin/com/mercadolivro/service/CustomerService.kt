@@ -2,15 +2,19 @@ package com.mercadolivro.service
 
 import com.mercadolivro.enum.CustomerStatus
 import com.mercadolivro.enum.Errors
+import com.mercadolivro.enum.RoleEnum
 import com.mercadolivro.exception.NotFoundException
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.repository.CustomerRepository
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class CustomerService(
     private val repository:CustomerRepository,
-    private val bookService:BookService ) {
+    private val bookService:BookService,
+    private val bcrypt: BCryptPasswordEncoder
+) {
 
     fun list(name:String?):List<CustomerModel>{
         name?.let {
@@ -24,7 +28,11 @@ class CustomerService(
     }
 
     fun postCustomer( customer: CustomerModel){
-        repository.save(customer)
+        val customerSave = customer.copy(
+            roles = setOf(RoleEnum.CUSTOMER),
+            password = bcrypt.encode(customer.password)
+        )
+        repository.save(customerSave)
     }
 
 

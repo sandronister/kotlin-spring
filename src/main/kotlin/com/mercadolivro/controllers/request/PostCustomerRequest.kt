@@ -8,5 +8,8 @@ data class PostCustomerRequest(
     val name:String,
 
     @field:Email(message="Informe um e-mail válido")
-    val email:String
+    val email:String,
+
+    @field:NotEmpty(message="É obrigatório informar o password")
+    val password:String
     )
