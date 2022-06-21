@@ -6,5 +6,6 @@ enum class Errors(val message:String,val code:String) {
     ML101("Book [%S] not found","ML-101"),
     ML102("Cannot update book with status [%s]","ML-102"),
     ML201("Customer [%S] not found","ML-201"),
-    ML301("Some books there are not in stock","ML-301")
+    ML301("Some books there are not in stock","ML-301"),
+    ML401("e-mail already in use","ML-401")
 }
